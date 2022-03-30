@@ -1,0 +1,53 @@
+/**
+ * Style definitions for notifications / window toast.
+ *
+ * I have legitimately no idea why it's called "toast" I think that's what
+ * google called them in Android and it just kinda stuck with me. Plus I can't
+ * be bothered to go in and refactor the code to say something else.
+ */
+
+@keyframes toast_popIn {
+    0% { top: -2cm; }
+    100% { top: 2cm; }
+}
+@keyframes toast_popOut {
+    0% { top: 2cm; }
+    100% { top: -2cm; }
+}
+
+div.toast {
+
+    color: white;
+    text-align: center;
+
+    // Positioning
+    display: inline-block;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    // Physical characteristics
+    width: calc(min(10cm, 98vw));
+    box-sizing: border-box;
+    padding: 3mm;
+    border-radius: 1.5mm;
+
+    // Animation
+    animation: toast_popIn .5s forwards;
+}
+div.toast.leaving {
+    animation: toast_popOut .5s forwards;
+}
+
+div.toast.debug {
+    background-color: hsl(0, 0, 50);
+    border: 3px solid hsl(0, 0, 30);
+}
+div.toast.error {
+    background-color: hsl(0, 90, 35);
+    border: 3px solid hsl(0, 90, 15);
+}
+div.toast.success {
+    background-color: hsl(109, 60, 30);
+    border: 3px solid hsl(109, 60, 15);
+}

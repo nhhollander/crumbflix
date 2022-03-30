@@ -1,0 +1,25 @@
+{
+    "$id": "clientMessage",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Client Message",
+    "description": "Validation for client → server messages",
+    "type": "object",
+
+    "oneOf": [
+        {
+            "properties": {
+                "class": {
+                    "type": "string",
+                    "pattern": "handshake"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "key": {
+                    "type": "string"
+                }
+            },
+            "required": ["class","name","key"]
+        }
+    ]
+}

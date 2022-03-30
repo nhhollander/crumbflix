@@ -1,0 +1,24 @@
+{
+  "name": "crumbflix-server",
+  "version": "1.0.0",
+  "description": "Crumbflix media and coordination server",
+  "main": "src/main/main.ts",
+  "scripts": {
+    "run": "ts-node ./src/main/main.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^17.0.21",
+    "@types/ws": "^8.5.2",
+    "typescript": "^4.6.2"
+  },
+  "dependencies": {
+    "ajv": "^8.10.0",
+    "cftypes": "file:../cftypes",
+    "ts-node": "^10.7.0",
+    "websocket": "^1.0.34",
+    "ws": "^8.5.0"
+  }
+}

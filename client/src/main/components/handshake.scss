@@ -1,0 +1,74 @@
+/**
+ * Style definitions for the handshake / authentication window.
+ */
+
+div.handshake {
+
+    background-color: black;
+
+    // Font settings
+    font-size: 150%;
+    color: white;
+
+    // Positioning
+    display: inline-block;
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+
+    // Physical characteristics
+    width: calc(min(10cm, 98vw));
+    box-sizing: border-box;
+    padding: 3mm;
+    padding-bottom: 0;
+    border-radius: 1.5mm;
+    opacity: 1;
+
+    // Animation
+    transition: top 1s, opacity .5s;
+
+    >* {
+        // Display
+        padding: 3mm;
+        width: 100%;
+        box-sizing: border-box;
+        margin-bottom: 3mm;
+
+        // Border
+        border-radius: 1.5mm;
+        border: none;
+
+        // Text
+        font-size: inherit;
+        text-align: center;
+        font-family: inherit;
+        color: white;
+    }
+
+    input {
+        transition: background-color 0.2s;;
+        background-color: #151515;
+        color: white;
+    }
+    input:disabled {
+        background-color: #353535;
+    }
+
+    button {
+        cursor: pointer;
+        transition: background-color 0.2s;
+        background-color: rgb(173, 0, 0);
+    }
+    button:hover {
+        background-color: rgb(197, 0, 0);
+    }
+    button:disabled {
+        background-color: rgb(187, 187, 187);
+    }
+
+}
+
+body[showtime="true"] div.handshake {
+    opacity: 0;
+    top: -50%;
+}

@@ -1,0 +1,20 @@
+/**
+ * Style definitions for the feature presentation.
+ */
+
+video.feature {
+    // Layout
+    position: fixed;
+    top: 50vh; left: 50vw;
+    transform: translate(-50%, -50%);
+    height: 100vh;
+
+    transition: opacity 2s;
+}
+
+body[showtime="false"] video.feature {
+    opacity: 0;
+}
+body[showtime="true"] video.feature {
+    opacity: 1;
+}

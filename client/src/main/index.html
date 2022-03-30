@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html style="background-color: #101010;">
+    <head>
+        <meta charset="utf-8"/>
+        <title><%= htmlWebpackPlugin.options.title %></title>
+    </head>
+    <body showtime="false" mouse="visible">
+        <!-- Cool background image -->
+        <div class="backdrop" id="backdrop"></div>
+        <!-- Main Video Frame -->
+        <video class="feature" src="http://localhost/rickroll.mp4"></video>
+        <!-- Handshake Window -->
+        <div class="handshake" id="handshake_window">
+            <input id="handshake_name" placeholder="Name" autofocus/>
+            <input id="handshake_key" placeholder="Key"/>
+            <button id="handshake_submit" disabled>Enter</button>
+        </div>
+        <!-- Controls -->
+        <div class="controlbar" id="controlbar">
+            <!-- Play / Pause -->
+            <svg id="cb_playpause" class="play" state="pause" viewBox="0 0 100 100">
+                <path class="bar1"></path>
+                <path class="bar2"></path>
+            </svg>
+            <!-- Volume -->
+            <svg id="cb_volume" class="volume" level="0" viewBox="0 0 100 100">
+                <path class="speaker"></path>
+                <path class="mute"></path>
+                <path class="arc arc1"></path>
+                <path class="arc arc2"></path>
+                <path class="arc arc3"></path>
+            </svg>
+            <!-- Open Media Library -->
+            <svg id="cb_media" class="media" viewBox="0 0 100 100">
+                <path></path>
+            </svg>
+            <!-- Scrub -->
+            <div id="cb_scrub" class="scrub">
+                <div class="barbox">
+                    <div id="cb_scrub_buffer"></div>
+                    <div id="cb_scrub_progress"></div>
+                </div>
+            </div>
+            <!-- Fullscreen Toggle -->
+            <svg id="cb_fullscreen" class="fullscreen" full="false" viewBox="0 0 100 100">
+                <path class="fs"></path>
+            </svg>
+            <!-- Picture-In-Picture Toggle -->
+            <svg id="cb_pip" class="pip" available="false" viewBox="0 0 100 100">
+                <path></path>
+            </svg>
+        </div>
+        <!-- Media Browser -->
+        <div class="media-browser" id="mediabrowser" visible="false">
+            <div class="posters">
+                <img src="https://stickylipsbbq.com/stickylips/wp-content/uploads/2019/03/Zootopia-Poster-1.jpg"/>
+                <img src="https://stickylipsbbq.com/stickylips/wp-content/uploads/2019/03/Zootopia-Poster-1.jpg"/>
+                <img src="https://stickylipsbbq.com/stickylips/wp-content/uploads/2019/03/Zootopia-Poster-1.jpg"/>
+                <img src="https://stickylipsbbq.com/stickylips/wp-content/uploads/2019/03/Zootopia-Poster-1.jpg"/>
+                <img src="https://stickylipsbbq.com/stickylips/wp-content/uploads/2019/03/Zootopia-Poster-1.jpg"/>
+                <img src="https://stickylipsbbq.com/stickylips/wp-content/uploads/2019/03/Zootopia-Poster-1.jpg"/>
+                <img src="https://stickylipsbbq.com/stickylips/wp-content/uploads/2019/03/Zootopia-Poster-1.jpg"/>
+                <img src="https://stickylipsbbq.com/stickylips/wp-content/uploads/2019/03/Zootopia-Poster-1.jpg"/>
+                <img src="https://stickylipsbbq.com/stickylips/wp-content/uploads/2019/03/Zootopia-Poster-1.jpg"/>
+                <img src="https://stickylipsbbq.com/stickylips/wp-content/uploads/2019/03/Zootopia-Poster-1.jpg"/>
+                <img src="https://stickylipsbbq.com/stickylips/wp-content/uploads/2019/03/Zootopia-Poster-1.jpg"/>
+                <img src="https://stickylipsbbq.com/stickylips/wp-content/uploads/2019/03/Zootopia-Poster-1.jpg"/>
+                <img src="https://stickylipsbbq.com/stickylips/wp-content/uploads/2019/03/Zootopia-Poster-1.jpg"/>
+                <img src="https://stickylipsbbq.com/stickylips/wp-content/uploads/2019/03/Zootopia-Poster-1.jpg"/>
+                <img src="https://stickylipsbbq.com/stickylips/wp-content/uploads/2019/03/Zootopia-Poster-1.jpg"/>
+                <img src="https://stickylipsbbq.com/stickylips/wp-content/uploads/2019/03/Zootopia-Poster-1.jpg"/>
+                <img src="https://stickylipsbbq.com/stickylips/wp-content/uploads/2019/03/Zootopia-Poster-1.jpg"/>
+                <img src="https://stickylipsbbq.com/stickylips/wp-content/uploads/2019/03/Zootopia-Poster-1.jpg"/>
+                <img src="https://stickylipsbbq.com/stickylips/wp-content/uploads/2019/03/Zootopia-Poster-1.jpg"/>
+                <img src="https://stickylipsbbq.com/stickylips/wp-content/uploads/2019/03/Zootopia-Poster-1.jpg"/>
+                <img src="https://stickylipsbbq.com/stickylips/wp-content/uploads/2019/03/Zootopia-Poster-1.jpg"/>
+                <img src="https://stickylipsbbq.com/stickylips/wp-content/uploads/2019/03/Zootopia-Poster-1.jpg"/>
+            </div>
+            <div class="details">
+                <h1>Media Information Here</h1>
+                Foobar asdfasdfasdf
+            </div>
+        </div>
+    </body>
+</html>

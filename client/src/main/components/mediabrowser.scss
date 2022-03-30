@@ -1,0 +1,129 @@
+/**
+ * Style definitions for the media browser window.
+ */
+
+$poster-width: 4cm;
+$padding: 3mm;
+$infopane-width: 15cm;
+$border-radius: 1.5mm;
+
+/* Use media queries to calculate the number of movie poster columns that should
+be shown on screen at any given time. This only applies when the media viewer is
+in "horizontal" mode. */
+@media (min-width: #{($poster-width + $padding) * 2 * 2}) {
+    div.media-browser div.posters {
+        --poster-columns: 2;
+    }
+}
+@media (min-width: #{($poster-width + $padding) * 3 * 2} ) {
+    div.media-browser div.posters {
+        --poster-columns: 3;
+    }
+}
+@media (min-width: #{($poster-width + $padding) * 4 * 2}) {
+    div.media-browser div.posters {
+        --poster-columns: 4;
+    }
+}
+@media (min-width: #{($poster-width + $padding) * 5 * 2}) {
+    div.media-browser div.posters {
+        --poster-columns: 5;
+    }
+}
+@media (min-width: #{($poster-width + $padding) * 6 * 2}) {
+    div.media-browser div.posters {
+        --poster-columns: 6;
+    }
+}
+
+/* Basic Style Definitions for the Media Browser. This defines how the media
+browser should be rendered in standard "horizontal" mode. Additional special
+definitions for the mobile-friendly "vertical" mode are defined below this
+glorious chunk of css. */
+div.media-browser {
+
+    position: fixed;
+    top: 1cm; left: 1cm;
+    width: calc(100vw - 2cm);
+    height: calc(100vh - 2cm);
+
+    transform: translateY(-100vh);
+    transition: transform .25s;
+
+    box-sizing: border-box;
+
+    background: #202020;
+    border-radius: $border-radius;
+
+    display: flex;
+
+    cursor: auto; // Cursor normally hidden when control bar goes away
+
+    overflow: hidden;
+
+    div.posters {
+
+        display: flex;
+        flex-wrap: wrap;
+        align-content: flex-start;
+        flex-grow: 0; // Don't grow
+        flex-shrink: 0; // Don't shrink
+
+        padding: $padding;
+
+        height: 100%;
+        width: calc(#{$poster-width + $padding} * var(--poster-columns));
+
+        overflow: scroll;
+        scrollbar-width: none;
+
+        img {
+            width: $poster-width;
+            margin-right: $padding;
+            margin-bottom: $padding;
+            border-radius: $border-radius;
+
+            transform: translateY(0);
+            transition: transform .1s;
+
+            cursor: pointer;
+        }
+        img:hover {
+            transform: translateY(-#{$padding / 2});
+        }
+
+    }
+
+    div.details {
+        flex-grow: 1; // Do Grow
+        flex-shrink: 1; // Do Shrink
+
+        color: white;
+
+        text-align: right;
+        margin-right: $padding;
+    }
+}
+
+div.media-browser[visible="true"] {
+    transform: translateY(0);
+}
+
+/* Style overrides for the mobile-friendly "vertical" mode */
+@media (max-aspect-ratio: 1) {
+
+    div.media-browser {
+
+        flex-direction: column-reverse;
+
+        div.posters {
+            flex-wrap: nowrap;
+            height: auto;
+
+            img {
+                margin-bottom: 0;
+            }
+        }
+    }
+
+}
