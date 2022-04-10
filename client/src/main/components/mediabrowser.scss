@@ -45,7 +45,7 @@ div.media-browser {
     position: fixed;
     top: 1cm; left: 1cm;
     width: calc(100vw - 2cm);
-    height: calc(100vh - 2cm);
+    height: calc(100vh - 3cm);
 
     transform: translateY(-100vh);
     transition: transform .25s;
@@ -55,11 +55,22 @@ div.media-browser {
     background: #202020;
     border-radius: $border-radius;
 
-    display: flex;
-
     cursor: auto; // Cursor normally hidden when control bar goes away
 
     overflow: hidden;
+    
+    display: flex;
+
+    div.screenshot {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+
+        background-size: cover;
+        background-position: center; 
+        mask-image: linear-gradient(50deg, rgba(0,0,0,.05) 20%, rgba(0,0,0,.5) 80%);
+        -webkit-mask-image: linear-gradient(50deg, rgba(0,0,0,.05) 20%, rgba(0,0,0,.5) 80%);
+    }
 
     div.posters {
 
@@ -93,6 +104,10 @@ div.media-browser {
         }
 
     }
+    // Dang it chrome!
+    div.posters::-webkit-scrollbar {
+        display: none;
+    }
 
     div.details {
         flex-grow: 1; // Do Grow
@@ -102,6 +117,53 @@ div.media-browser {
 
         text-align: right;
         margin-right: $padding;
+
+        div.textcontent {
+
+            /* Not sure why this element needs to be positioned, but if it's not
+            then it will render behind the screenshot element. This strange
+            effect happens in both Firefox 98 and Chromium 100.*/
+            position: relative;
+
+            height: 100%;
+
+            h1 {
+                font-size: 300%;
+            }
+
+            div.buttons {
+                text-align: center;
+                position: absolute;
+                bottom: calc(10% + 1cm);
+                width: 100%;
+                margin-left: 3mm;
+                margin-right: 3mm;
+                
+                button {
+                    min-width: 25%;
+                    box-sizing: border-box;
+                    padding: 3mm;
+
+                    font-size: 110%;
+                    background-color: #ad0000;
+                    transition: transform 0.2s;
+                    cursor: pointer;
+
+                    border: none;
+                    border-radius: $border-radius;
+                    color: white;
+
+                    white-space: nowrap;
+                    
+                    transform: scale(1);
+                }
+
+                button:hover {
+                    background-color: #c50000;
+                    transform: scale(1.1);
+                }
+            }
+        }
     }
 }
 
@@ -115,6 +177,11 @@ div.media-browser[visible="true"] {
     div.media-browser {
 
         flex-direction: column-reverse;
+
+        div.screenshot {
+            mask-image: linear-gradient(0deg, rgba(0,0,0,1) 20%, rgba(0,0,0,.4) 80%);
+            -webkit-mask-image: linear-gradient(0deg, rgba(0,0,0,.1) 20%, rgba(0,0,0,.4) 60%);
+        }
 
         div.posters {
             flex-wrap: nowrap;

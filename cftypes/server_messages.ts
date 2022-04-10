@@ -2,13 +2,14 @@
  * Type definitions for server → client messages.
  */
 
-import * as generic from './general';
+import * as general from './general';
 
 // Media Control Messages //
 
-export type MediaControlSimpleMessage = {
+export type MediaControlSetStateMessage = {
     class: "media",
-    command: "play" | "pause";
+    command: "setState",
+    state: general.MediaPlaybackState
 };
 export type MediaControlSeekMessage = {
     class: "media",
@@ -21,9 +22,20 @@ export type MediaControlSetMediaMessage = {
     media: string
 };
 export type MediaControlMessage = 
-    MediaControlSimpleMessage |
+    MediaControlSetStateMessage |
     MediaControlSeekMessage |
     MediaControlSetMediaMessage;
+
+// Media Library Messages //
+
+export type MediaLibraryListMessage = {
+    class: "library",
+    command: "list",
+    media: Array<general.MediaEntry>
+};
+
+export type MediaLibraryMessage =
+    MediaLibraryListMessage;
 
 // Handshake / Authentication Messages //
 
@@ -50,5 +62,6 @@ export type DeveloperError = {
 
 export type All =
     MediaControlMessage |
+    MediaLibraryMessage |
     HandshakeMessage |
     DeveloperError;

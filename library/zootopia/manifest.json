@@ -1,0 +1,8 @@
+{
+    "name": "Zootopia",
+    "description": "In a city of anthropomorphic animals, a rookie bunny cop and a cynical con artist fox must work together to uncover a conspiracy.",
+    "poster": "./poster.jpg",
+    "screenshot": "./screenshot.jpg",
+    "previewSource": "./preview.mp4",
+    "mediaSource": "https://cdn.example.com/zootopia.m3u8"
+}

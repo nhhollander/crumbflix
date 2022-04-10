@@ -5,7 +5,7 @@
  * automatically sync their times and playback.
  */
 
-import * as cftypes from 'cftypes/generic';
+import * as cftypes from 'cftypes/general';
 
 import * as comms from './comms';
 import Client from './client';
@@ -50,7 +50,8 @@ export function set_state(s: cftypes.MediaPlaybackState) {
     state = s;
     comms.send_to_all({
         class: "media",
-        command: s // Command expands to "play" or "pause"
+        command: "setState",
+        state: s // Command expands to "play" or "pause"
     });
     if(s == "pause") {
         // Update time
@@ -100,6 +101,7 @@ export function sync(client:Client) {
     });
     client.sendMessage({
         class: "media",
-        command: state // "play" or "pause"
+        command: "setState",
+        state: state // "play" or "pause"
     });
 }

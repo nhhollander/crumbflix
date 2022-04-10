@@ -5,9 +5,12 @@
 export type MediaPlaybackState = "play" | "pause";
 
 export type MediaEntry = {
+    // Static properties
     name: string,
-    poster: string,
     description: string,
+    // Properties to transform
+    poster: string,
     screenshot: string,
-    playlist: string
+    previewSource: string,
+    mediaSource: string
 };

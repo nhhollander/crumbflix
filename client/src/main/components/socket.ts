@@ -4,6 +4,7 @@ import * as ClientMessages from "cftypes/client_messages";
 import * as ServerMessages from "cftypes/server_messages";
 
 let socket: WebSocket;
+let socket_timeout: NodeJS.Timeout;
 let retry_cooldown:number = 1000; // ms
 let retry_count:number = 0;
 
@@ -48,11 +49,18 @@ export function connect() {
     socket.addEventListener("open", socket_open);
     socket.addEventListener("close", socket_close);
     socket.addEventListener("message", socket_msg);
+    // Set connection timeout
+    socket_timeout = setTimeout(() => {
+        console.warn("Aborting websocket connection attempt: Timeout");
+        socket.close();
+    }, 2500);
+    
 }
 document.addEventListener("DOMContentLoaded", connect);
 
 
 function socket_error() {
+    clearTimeout(socket_timeout);
     if(!error_toast) {
         error_toast = toast("error", "Server Communication Error!", -1);
     }
@@ -60,6 +68,7 @@ function socket_error() {
 
 function socket_open() {
     console.log("Connection established to server!");
+    clearTimeout(socket_timeout);
     connection_state = ConnectionState.CONNECTED;
     retry_cooldown = 1000; // Reset cooldown
     retry_count = 0;
@@ -79,6 +88,7 @@ function socket_open() {
 }
 
 async function socket_close() {
+    clearTimeout(socket_timeout);
     if(connection_state == ConnectionState.CONNECTED) {
         toast("debug", "Connection to server closed");
     }

@@ -6,28 +6,45 @@ import * as generic from './general';
 
 // Media Control Messages //
 
-export type MediaControlSimpleMessage = {
-    "class": "media",
-    "command": generic.MediaPlaybackState;
-};
+export type MediaControlSetState = {
+    class: "media",
+    command: "setState",
+    state: generic.MediaPlaybackState
+}
 export type MediaControlSeekMessage = {
-    "class": "media",
-    "command": "seek",
-    "time": number
+    class: "media",
+    command: "seek",
+    time: number
+};
+export type MediaControlSetMediaMessage = {
+    class: "media",
+    command: "set",
+    media: string
 };
 export type MediaControlMessage = 
-    MediaControlSimpleMessage |
-    MediaControlSeekMessage;
+    MediaControlSetState |
+    MediaControlSeekMessage |
+    MediaControlSetMediaMessage;
+
+// Media Library Messages //
+
+export type MediaLibraryListMessage = {
+    class: "library",
+    command: "list"
+};
+export type MediaLibraryMessage =
+    MediaLibraryListMessage;
 
 // Handshake / Authentication Messages //
 
 export type HandshakeMessage = {
-    "class": "handshake",
-    "name": string,
-    "key": string
+    class: "handshake",
+    name: string,
+    key: string
 };
 
 // Special all-encompassing message type //
 export type All = 
     MediaControlMessage |
+    MediaLibraryMessage |
     HandshakeMessage;

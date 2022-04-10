@@ -39,8 +39,8 @@ module.exports = {
   plugins: [
       new MiniCssExtractPlugin(),
       new HtmlWebpackPlugin({
-          title: 'Crumbflix',
-          template: 'src/main/index.html'
+        title: 'Crumbflix',
+        template: 'src/main/index.html'
       })
   ]
 };

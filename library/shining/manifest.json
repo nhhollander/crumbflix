@@ -1,0 +1,8 @@
+{
+    "name": "The Shining",
+    "description": "Ooh spooky movie",
+    "poster": "./poster.jpg",
+    "screenshot": "./screenshot.jpg",
+    "previewSource": "./preview.mp4",
+    "mediaSource": "https://cdn.example.com/shining.m3u8"
+}

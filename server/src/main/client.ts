@@ -9,6 +9,7 @@ import * as mediastate from './mediastate';
 import * as ClientMessages from "cftypes/client_messages";
 import * as ServerMessages from "cftypes/server_messages";
 import { info } from 'console';
+import * as library from './library';
 
 /**
  * Client Class.
@@ -70,8 +71,10 @@ export default class Client {
             return;
         }
         // Handle post-handshake messages
+        this.log("Got message", data.class);
         switch(data.class) {
             case 'media': this.handle_mediacontrol(data); return;
+            case 'library': this.handle_library(data); return;
             default:
                 dev_error(`Unrecognized message class '${data['class']}'`);
                 this.error("Sent an unrecognized command");
@@ -108,7 +111,7 @@ export default class Client {
             return;
         }
 
-        if(raw_key != "yeehawd" && false) {
+        if(raw_key != "foxes" && false) {
             reject('Incorrect Key');
             return;
         }
@@ -130,14 +133,53 @@ export default class Client {
     }
 
     private handle_mediacontrol(msg:ClientMessages.MediaControlMessage) {
-        // Simple commands
-        if(msg.command == "pause" || msg.command == "play") {
-            this.log(`Changed playback state to [${msg.command}]`);
-            mediastate.set_state(msg.command);
+        if(msg.command == "setState") {
+            this.log(`Changed playback state to [${msg.state}]`);
+            mediastate.set_state(msg.state);
         }
         else if(msg.command == "seek") {
-            this.log(`Changed time to ${msg.time}s`);
-            mediastate.set_time(msg.time);
+            let seek_msg = msg as ClientMessages.MediaControlSeekMessage;
+            this.log(`Changed time to ${seek_msg.time}s`);
+            mediastate.set_time(seek_msg.time);
+        }
+        else if(msg.command == "set") {
+            this.log(`Changed media to ${msg.media}`);
+            mediastate.set_media(msg.media);
+        }
+    }
+
+    private handle_library(msg:ClientMessages.MediaLibraryMessage) {
+        if(msg.command == "list") {
+            // TODO: Implement media list. For the time being, dummy data is returned.
+            library.read_library().then((library) => {
+                this.sendMessage({
+                    class: "library",
+                    command: "list",
+                    media: library
+                })
+            });
+            this.sendMessage({
+                class: "library",
+                command: "list",
+                media: [
+                    {
+                        name: "Zootopia",
+                        poster: "zootopia.jpg",
+                        description: "In a city of anthropomorphic animals, a rookie bunny cop and a cynical con artist fox must work together to uncover a conspiracy.",
+                        screenshot: "zootopia.jpg",
+                        previewSource: "",
+                        mediaSource: ""
+                    },
+                    {
+                        name: "The Shining",
+                        poster: "shining.jpg",
+                        description: "Ooh spooky mountain movie",
+                        screenshot: "shining.jpg",
+                        previewSource: "",
+                        mediaSource: ""
+                    }
+                ]
+            });
         }
     }
 

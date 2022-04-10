@@ -20,13 +20,15 @@ document.addEventListener("DOMContentLoaded", init);
 export function play_pause() {
     if(video_element.paused) {
         socket.socket_send({
-            "class": "media",
-            "command": "play"
+            class: "media",
+            command: "setState",
+            state: "play"
         });
     } else {
         socket.socket_send({
-            "class": "media",
-            "command": "pause"
+            class: "media",
+            command: "setState",
+            state: "pause"
         });
     }
 }
@@ -36,12 +38,20 @@ export function play_pause() {
 //================//
 
 function handle_mediacontrol(msg:ServerMessages.MediaControlMessage) {
-    // Simple commands
-    if(msg.command == "pause") {
-        video_element.pause();
+    if(msg.command == "setState") {
+        if(msg.state == "pause") {
+            video_element.pause();
+        }
+        else if(msg.state == "play") {
+            play();
+        }
     }
-    if(msg.command == "play") {
-        play();
+    else if(msg.command == "set") {
+        video_element.src = msg.media;
+    }
+    else if(msg.command == "seek") {
+        video_element.currentTime = msg.time;
+        // TODO: Force dispatch a video time update event
     }
 }
 
@@ -60,8 +70,4 @@ async function play() {
     } catch {}
     // General failure
     toast("error", "Failed to resume playback!", 5000);
-}
-
-function pause() {
-    video_element.pause();
 }
