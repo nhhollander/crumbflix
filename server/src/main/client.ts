@@ -158,28 +158,6 @@ export default class Client {
                     media: library
                 })
             });
-            this.sendMessage({
-                class: "library",
-                command: "list",
-                media: [
-                    {
-                        name: "Zootopia",
-                        poster: "zootopia.jpg",
-                        description: "In a city of anthropomorphic animals, a rookie bunny cop and a cynical con artist fox must work together to uncover a conspiracy.",
-                        screenshot: "zootopia.jpg",
-                        previewSource: "",
-                        mediaSource: ""
-                    },
-                    {
-                        name: "The Shining",
-                        poster: "shining.jpg",
-                        description: "Ooh spooky mountain movie",
-                        screenshot: "shining.jpg",
-                        previewSource: "",
-                        mediaSource: ""
-                    }
-                ]
-            });
         }
     }
 

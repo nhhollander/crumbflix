@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const webpack = require('webpack');
 
 module.exports = {
   mode: 'development',
@@ -41,6 +42,9 @@ module.exports = {
       new HtmlWebpackPlugin({
         title: 'Crumbflix',
         template: 'src/main/index.html'
+      }),
+      new webpack.ProvidePlugin({
+        Buffer: ['buffer', 'Buffer'],
       })
   ]
 };

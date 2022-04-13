@@ -3,7 +3,6 @@
  */
 
 import { handshake } from './socket';
-import * as backdrop from './backdrop';
 import "./handshake.scss";
 import { toast } from './toast';
 import * as socket from "./socket";
@@ -31,10 +30,36 @@ export function init() {
     
     socket.register_handler("handshake", handshake_event);
 
-    // Initial update to check for browser autopopulated fields
+    // Check for encoded auto-login options in URL
+    if(window.location.hash) {
+        try {
+            let buffer = Buffer.from(window.location.hash, 'base64');
+            let login = JSON.parse(buffer.toString('utf-8')) as {
+                name: string | void,
+                key: string | void
+            };
+            if(login.name) {
+                name_element.value = login.name;
+                name_element.disabled = true;
+            }
+            if(login.key) {
+                key_element.value = login.key;
+                key_element.disabled = true;
+            }
+            if(login.name && login.key) {
+                submit();
+            }
+        } catch(e) {
+            console.warn("Failed to parse URL encoded login parameters", e);
+        }
+    }
+
+    // Initial update to check for browser auto-populated fields
     update();
     // HACK: Run another update after a brief delay to catch autopopulation
     setTimeout(update, 100);
+
+    // 
 }
 document.addEventListener("DOMContentLoaded", init);
 
