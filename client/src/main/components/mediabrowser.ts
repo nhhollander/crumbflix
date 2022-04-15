@@ -88,6 +88,7 @@ function play_clicked() {
         command: "set",
         media: current_entry.mediaSource
     });
+    hide(); // Minimize the media browser
 }
 
 function preview_clicked() {
@@ -100,6 +101,7 @@ function preview_clicked() {
         command: "set",
         media: current_entry.previewSource
     });
+    hide(); // Minimize the media browser
 }
 
 //============================================//
