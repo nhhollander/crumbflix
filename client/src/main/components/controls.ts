@@ -28,10 +28,13 @@ function init() {
     video_element = document.querySelector("video.feature") as HTMLVideoElement;
     video_element.addEventListener("volumechange", volume_changed);
     video_element.addEventListener("timeupdate", video_time_update);
-    video_element.addEventListener("play", video_play);
-    video_element.addEventListener("pause", video_pause);
-    setTimeout(volume_changed, 250); // HACK: Prevent volume de-synchronization on load
-    setInterval(video_buffer_update, 1000); // HACK: Prevent video buffer de-synchronization
+    video_element.addEventListener("play", video_state_changed);
+    video_element.addEventListener("pause", video_state_changed);
+    video_element.addEventListener("loadstart", video_state_changed);
+    // HACK: Prevent volume de-synchronization on load
+    setTimeout(volume_changed, 250);
+    // HACK: Video buffer elements are unreliable, just update every second instead.
+    setInterval(video_buffer_update, 1000);
 
     bar = document.getElementById("controlbar") as HTMLDivElement;
 
@@ -139,15 +142,14 @@ function video_buffer_update() {
 
 function video_time_update() {
     let percent = video_element.currentTime / video_element.duration;
+    if(isNaN(percent)) {
+        percent = 0;
+    }
     scrub_progress_element.style.width = (percent * 100) + "%";
 }
 
-function video_play() {
-    button_playpause.setAttribute("state", "play");
-}
-
-function video_pause() {
-    button_playpause.setAttribute("state", "pause");
+function video_state_changed() {
+    button_playpause.setAttribute("state", video_element.paused ? "pause" : "play")
 }
 
 function fullscreen_clicked() {
